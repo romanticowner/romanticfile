@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Access</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+  color: white;
+  text-align: center;
+  overflow-x:hidden;
+}
+
+.container {
+  margin: 70px auto;
+  width: 90%;
+  max-width: 400px;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 40px rgba(255,0,100,0.25);
+}
+
+.logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: auto;
+  background: url('logo.jpg') no-repeat center/cover;
+  box-shadow: 0 0 25px rgba(255,0,120,0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 15px rgba(255,0,120,0.5); }
+  50% { box-shadow: 0 0 35px rgba(255,0,120,1); }
+  100% { box-shadow: 0 0 15px rgba(255,0,120,0.5); }
+}
+
+h1 {
+  margin: 15px 0 5px;
+  font-size: 26px;
+}
+
+p {
+  color: #bbb;
+  font-size: 15px;
+}
+
+.badges {
+  margin: 15px 0;
+}
+
+.badge {
+  display: inline-block;
+  background: #222;
+  padding: 6px 12px;
+  margin: 4px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.counter {
+  font-size: 22px;
+  margin: 10px 0;
+  color: #ff4f7a;
+}
+
+.spots {
+  color: #ffcc00;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.button {
+  margin-top: 15px;
+  padding: 14px 30px;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #ff004f, #ff4f7a);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(255,0,100,0.4);
+  transition: 0.3s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #888;
+}
+
+/* popup */
+.popup {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #111;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 13px;
+  box-shadow: 0 0 10px rgba(255,0,100,0.3);
+  display: none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo"></div>
+
+  <h1>🔒 ROMANTIC FILES</h1>
+  <p>Private premium community • Limited access</p>
+
+  <div class="badges">
+    <span class="badge">🔥 Daily Drops</span>
+    <span class="badge">💎 Exclusive</span>
+    <span class="badge">🚫 Entry Closing Soon</span>
+  </div>
+
+  <div class="counter" id="counter">4,200+ members joining...</div>
+  <div class="spots" id="spots">⚠️ Only 127 spots left today</div>
+
+  <p>Are you 18+?</p>
+
+  <button class="button" onclick="startRedirect()">Yes, Enter</button>
+
+  <div class="footer">
+    Having trouble joining?<br>
+    Message <b>@romanticowner</b> on Telegram
+  </div>
+
+</div>
+
+<div class="popup" id="popup"></div>
+
+<script>
+// live counter
+let count = 4200;
+setInterval(() => {
+  count += Math.floor(Math.random() * 4);
+  document.getElementById("counter").innerText =
+    count.toLocaleString() + "+ members joining...";
+}, 1500);
+
+// spots decreasing
+let spots = 127;
+setInterval(() => {
+  if (spots > 12) {
+    spots -= Math.floor(Math.random() * 2);
+    document.getElementById("spots").innerText =
+      "⚠️ Only " + spots + " spots left today";
+  }
+}, 3000);
+
+// fake join popups
+const names = ["Rahul", "Aman", "Priya", "Karan", "Neha", "Arjun", "Riya"];
+setInterval(() => {
+  let name = names[Math.floor(Math.random() * names.length)];
+  let popup = document.getElementById("popup");
+  popup.innerText = name + " just joined ✔";
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2500);
+}, 4000);
+
+// redirect
+function startRedirect() {
+  let timeLeft = 3;
+  document.querySelector(".container").innerHTML =
+    "<h2>⏳ Verifying access...</h2><p id='timer'>Redirecting in 3s</p>";
+
+  let timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").innerText =
+      "Redirecting in " + timeLeft + "s";
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      window.location.href = "https://t.me/+Tvs3oFrR_No3YjE1";
+    }
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
